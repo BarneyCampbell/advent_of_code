@@ -1,8 +1,7 @@
-use std::{collections::HashSet, str::FromStr, fmt::Display};
+use std::{collections::HashSet, str::FromStr};
 
 
 struct Card {
-    id: u32,
     copies: u32,
     winners: HashSet<u32>,
     choices: HashSet<u32>
@@ -14,45 +13,32 @@ impl FromStr for Card {
     type Err = ParseCardError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut sides = s.split(":");
+        let numbers: Vec<&str> = s.split(": ")
+                                  .nth(1)
+                                  .unwrap()
+                                  .split(" | ")
+                                  .collect();
         
-        let id: u32 = sides.next()
-                           .unwrap()
-                           .split_whitespace()
-                           .nth(1)
-                           .unwrap()
-                           .parse()
-                           .unwrap();
+        let winners: HashSet<u32> = numbers[0].split_whitespace()
+                                              .collect::<Vec<&str>>()
+                                              .iter()
+                                              .map(|elem| elem.parse().unwrap())
+                                              .collect();
 
-        let numbers: Vec<&str> = sides.next()
-                                      .unwrap()
-                                      .split(" | ")
-                                      .collect();
-        
-        let mut winners: HashSet<u32> = HashSet::new();
-        let mut choices: HashSet<u32> = HashSet::new();
+        let choices: HashSet<u32> = numbers[1].split_whitespace()
+                                              .collect::<Vec<&str>>()
+                                              .iter()
+                                              .map(|elem| elem.parse().unwrap())
+                                              .collect();
 
-        for num in numbers[0].split_whitespace() {
-            winners.insert(num.parse().unwrap());
-        }
 
-        for num in numbers[1].split_whitespace() {
-            choices.insert(num.parse().unwrap());
-        }
-
-        Ok(Card {id, winners, choices, copies: 1})
+        Ok(Card {winners, choices, copies: 1})
     }
 }
 
 impl Default for Card {
     fn default() -> Self {
-        Card {id: 0, winners: HashSet::new(), choices: HashSet::new(), copies: 0}
-    }
-}
-
-impl Display for Card {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{},{:?},{:?}", self.id, self.winners, self.choices)
+        Card {winners: HashSet::new(), choices: HashSet::new(), copies: 0}
     }
 }
 
@@ -71,11 +57,9 @@ pub fn part1(filepath: &str) -> i32 {
 }
 
 pub fn part2(filepath: &str) -> i32 {
-    let mut cards: Vec<Card> = Vec::new();
     let mut total = 0;
 
-    if let Ok(res) = aoc::read_lines::<Card>(filepath) {
-        cards = res;
+    if let Ok(mut cards) = aoc::read_lines::<Card>(filepath) {
         let mut cur: usize = 0;
         while cur < cards.len() {
             let count = cards[cur].winners.intersection(&cards[cur].choices).count();
