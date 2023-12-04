@@ -4,7 +4,8 @@ use std::str::FromStr;
 pub enum ReadError {
     ReadLineError,
     ReadChunkError,
-    ReadEntireError
+    ReadEntireError,
+    ReadByteVecError,
 }
 
 #[derive(Debug)]
@@ -46,4 +47,21 @@ pub fn read_entire<T>(filepath: &str) -> Result<T, AOCError>
         }
     }
     else { Err(AOCError::ReadError(ReadError::ReadEntireError)) }
+}
+
+pub fn read_char_vec(filepath: &str) -> Result<Vec<Vec<char>>, AOCError> {
+    if let Ok(filestr) = std::fs::read_to_string(filepath) {
+        let mut res: Vec<Vec<char>> = Vec::new();
+
+        for line in filestr.lines() {
+            res.push(line.chars().collect::<Vec<char>>());
+        }
+
+        Ok(res)
+    }
+    else { Err(AOCError::ReadError(ReadError::ReadByteVecError)) }
+}
+
+pub fn flatten<T>(nested: Vec<Vec<T>>) -> Vec<T> {
+    nested.into_iter().flatten().collect()
 }

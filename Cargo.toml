@@ -10,31 +10,31 @@ path = "src/aoc.rs"
 
 [[bin]]
 name = "day1"
-path = "src/aoc2022/day1.rs"
+path = "src/aoc2023/day1.rs"
 
 [[bin]]
 name = "day2"
-path = "src/aoc2022/day2.rs"
+path = "src/aoc2023/day2.rs"
 
 [[bin]]
 name = "day3"
-path = "src/aoc2022/day3.rs"
+path = "src/aoc2023/day3.rs"
 
 [[bin]]
 name = "day4"
-path = "src/aoc2022/day4.rs"
+path = "src/aoc2023/day4.rs"
 
 [[bin]]
 name = "day5"
-path = "src/aoc2022/day5.rs"
+path = "src/aoc2023/day5.rs"
 
 [[bin]]
 name = "day6"
-path = "src/aoc2022/day6.rs"
+path = "src/aoc2023/day6.rs"
 
 [[bin]]
 name = "day7"
-path = "src/aoc2022/day7.rs"
+path = "src/aoc2023/day7.rs"
 
 
 [dependencies]

@@ -1,7 +1,7 @@
-mod aoc2022;
+mod aoc2023;
 
 fn main() {
    println!("use --bin 'day[n]'");
    
-   aoc2022::run();
+   aoc2023::run();
 }
