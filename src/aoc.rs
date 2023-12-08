@@ -65,3 +65,46 @@ pub fn read_char_vec(filepath: &str) -> Result<Vec<Vec<char>>, AOCError> {
 pub fn flatten<T>(nested: Vec<Vec<T>>) -> Vec<T> {
     nested.into_iter().flatten().collect()
 }
+
+pub mod maths {
+    pub fn lcm(v: Vec<u64>) -> u64 {
+        if v.len() == 1 {
+            return v[0];
+        }
+        if v.len() == 2 {
+            return lcm_pair(v[0], v[1]);
+        }
+    
+        let (x, xs) = v.split_at(2); // #Haskell
+        return lcm_pair(lcm(x.to_vec()), lcm(xs.to_vec()));
+    }
+    
+    fn lcm_pair(a: u64, b: u64) -> u64 {
+        let numbers = vec![a, b];
+        let mut temp = numbers.clone();
+        
+        // check all the same
+        loop {
+            let mut same = true;
+    
+            for idx in 1..temp.len() {
+                if temp[0] != temp[idx] {
+                    same = false;
+                    break;
+                }
+            }
+    
+            if same {
+                return temp[0];
+            }
+    
+            // Find lowest index
+            match temp.iter().enumerate().min_by(|(_, a), (_, b)| a.cmp(b)).map(|(index, _)| index) {
+                Some(idx) => {
+                    temp[idx] = temp[idx] + numbers[idx];
+                },
+                None => panic!("Not possible")
+            }
+        }
+    }
+}
