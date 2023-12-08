@@ -1,4 +1,4 @@
-use std::{str::FromStr, collections::HashMap, sync::mpsc, thread};
+use std::{str::FromStr, collections::HashMap};
 
 struct ParseAlmanacError;
 #[derive(Debug)]
@@ -102,6 +102,7 @@ fn get_mapped(almanac: &Almanac, seeds: Vec<usize>) -> Vec<usize> {
                 }
                 else {
                     current_value = seeds[i];
+                    new_stage = almanac.maps.get(&current_stage).unwrap().destination.clone();
                 }
             }
             seeds[i] = current_value;
@@ -115,7 +116,6 @@ fn get_mapped(almanac: &Almanac, seeds: Vec<usize>) -> Vec<usize> {
 pub fn part1(filepath: &str) -> i32 {
     if let Ok(almanac) = aoc::read_entire::<Almanac>(filepath) {
         let mapped = get_mapped(&almanac, almanac.seeds.clone());
-
         let mut min = usize::MAX;
 
         for seed in mapped {
@@ -132,56 +132,7 @@ pub fn part1(filepath: &str) -> i32 {
 
 pub fn part2(filepath: &str) -> i32 {
     if let Ok(almanac) = aoc::read_entire::<Almanac>(filepath) {
-        let mut seeds: Vec<Vec<usize>> = Vec::new();
-        let mut pair_pos = 1;
 
-        for pair in almanac.seeds.windows(2) {
-            pair_pos += 1;
-            if pair_pos % 2 != 0 { continue; }
-            seeds.push((pair[0]..(pair[0] + pair[1])).map(|n| usize::from(n)).collect());
-        }
-        let seeds_len = seeds.len();
-
-        let (tx, rx) = mpsc::channel();
-
-        for seed in seeds {
-            let transmitter = tx.clone();
-            let almanac = almanac.clone();
-
-            thread::spawn(move || {
-                let mapped = get_mapped(&almanac, seed);
-
-                let mut min = usize::MAX;
-
-                for seed in mapped {
-                    if seed < min {
-                        min = seed;
-                    }
-                }
-
-                transmitter.send(min).unwrap();
-            });
-        }
-
-        let mut i = 0;
-        let mut mins: Vec<usize> = Vec::new();
-
-        for message in rx {
-            println!("{}", message);
-            mins.push(message);
-            i += 1;
-            //if i <= seeds_len { break }
-        }
-
-
-        println!("{:?}", mins);
-        let mut min = usize::MAX;
-        for m in mins {
-            if m < min {
-                min = m;
-            }
-        }
-        return min.try_into().unwrap();
     }
 
     0
@@ -189,6 +140,7 @@ pub fn part2(filepath: &str) -> i32 {
 
 pub fn main() {
     let filepath = "data/day5small.txt";
+
     println!("Day 5 part 1: {}", part1(filepath));
     println!("Day 5 part 2: {}", part2(filepath));
 }
