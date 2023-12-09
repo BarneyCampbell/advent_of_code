@@ -1,0 +1,5 @@
+(library
+ (name aoc)
+ (modules files functions))
+
+(include_subdirs unqualified)
