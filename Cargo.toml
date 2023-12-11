@@ -40,4 +40,12 @@ path = "src/aoc2023/day7.rs"
 name = "day8"
 path = "src/aoc2023/day8.rs"
 
+[[bin]]
+name = "day9"
+path = "src/aoc2023/day9.rs"
+
+[[bin]]
+name = "day10"
+path = "src/aoc2023/day10.rs"
+
 [dependencies]
