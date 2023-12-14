@@ -131,7 +131,7 @@ pub fn part1(filepath: &str) -> i32 {
 }
 
 pub fn part2(filepath: &str) -> i32 {
-    if let Ok(almanac) = aoc::read_entire::<Almanac>(filepath) {
+    if let Ok(_almanac) = aoc::read_entire::<Almanac>(filepath) {
 
     }
 

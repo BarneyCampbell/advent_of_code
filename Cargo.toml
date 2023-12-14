@@ -6,46 +6,77 @@ default-run = "advent_of_code"
 
 [lib]
 name = "aoc"
-path = "src/aoc.rs"
+path = "src/aoc/aoc.rs"
 
 [[bin]]
 name = "day1"
 path = "src/aoc2023/day1.rs"
+test = false
 
 [[bin]]
 name = "day2"
 path = "src/aoc2023/day2.rs"
+test = false
 
 [[bin]]
 name = "day3"
 path = "src/aoc2023/day3.rs"
+test = false
 
 [[bin]]
 name = "day4"
 path = "src/aoc2023/day4.rs"
+test = false
 
 [[bin]]
 name = "day5"
 path = "src/aoc2023/day5.rs"
+test = false
 
 [[bin]]
 name = "day6"
 path = "src/aoc2023/day6.rs"
+test = false
 
 [[bin]]
 name = "day7"
 path = "src/aoc2023/day7.rs"
+test = false
 
 [[bin]]
 name = "day8"
 path = "src/aoc2023/day8.rs"
+test = false
 
 [[bin]]
 name = "day9"
 path = "src/aoc2023/day9.rs"
+test = false
 
 [[bin]]
 name = "day10"
 path = "src/aoc2023/day10.rs"
+test = false
+
+[[bin]]
+name = "day11"
+path = "src/aoc2023/day11.rs"
+test = false
+
+[[bin]]
+name = "day12"
+path = "src/aoc2023/day12.rs"
+test = false
+
+[[bin]]
+name = "day13"
+path = "src/aoc2023/day13.rs"
+test = false
+
+[[bin]]
+name = "day14"
+path = "src/aoc2023/day14.rs"
+test = false
 
 [dependencies]
+itertools = "0.12.0"

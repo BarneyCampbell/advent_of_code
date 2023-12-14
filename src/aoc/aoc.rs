@@ -1,3 +1,5 @@
+pub mod data_structures;
+
 use std::str::FromStr;
 
 #[derive(Debug)]
