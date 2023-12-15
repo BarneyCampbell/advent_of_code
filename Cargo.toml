@@ -78,5 +78,10 @@ name = "day14"
 path = "src/aoc2023/day14.rs"
 test = false
 
+[[bin]]
+name = "day15"
+path = "src/aoc2023/day15.rs"
+test = false
+
 [dependencies]
 itertools = "0.12.0"
