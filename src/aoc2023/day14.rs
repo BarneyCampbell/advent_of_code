@@ -42,6 +42,13 @@ fn part2(filepath: &str) -> usize {
         for i in 0..controls.height {
             let _ = controls.replace_row(roll_col(controls.row(i), true), i);
         }
+        println!("_------------------_");
+        for row in controls.rows() {
+            for c in row {
+                print!("{c}");
+            }
+            println!("");
+        }
         if let Some(pos) = states.get(&controls.data) {
             cycle_start = *pos;
             cycle_end = x;
@@ -122,7 +129,7 @@ fn roll_col(mut col: Vec<char>, rev: bool) -> Vec<char> {
 }
 
 pub fn main() {
-    let filepath = "data/day14.txt";
+    let filepath = "data/day14small.txt";
 
     println!("Day 14 part 1: {}", part1(filepath));
     println!("Day 14 part 2: {}", part2(filepath));
