@@ -5,6 +5,7 @@ import Numeric (readInt)
 
 run :: String -> IO ()
 run file = do lines <- Util.fileCharArray file >>= mapM (return . Util.readInt) -- Crazy
+              putStrLn "\nDay one:"
               putStr "Part 1: "
               print . sum $ map getFuel lines
               putStr "Part 2: "

@@ -4,3 +4,5 @@
 
 * Day 1 - Beginning the journey...
 * Lots of impressive monadical behaviours on offer here
+* Day 2 part 1 - starting `the computer`
+* Day 2 part 2 - rtfq
