@@ -29,9 +29,6 @@ splitMap f str c = do let (x, xs) = takeOne str c
 bind :: Char -> (String, Maybe String) -> (String, Maybe String)
 bind c (str, rest) = (c:str, rest)
 
---split :: String -> Char -> [String]
---split 
-
 -- for easy composing
 readInt :: String -> Int
 readInt "" = 0

@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               aoc2019
-version:            0.1.0.0
+version:            0.1.0.1
 
 -- A short (one-line) description of the package.
 -- synopsis:
@@ -22,14 +22,14 @@ maintainer:         barney.campbell1@proton.me
 extra-source-files: CHANGELOG.md
 
 library
-    exposed-modules:  Util, Computer, Day1, Day2
+    exposed-modules:  Util, Computer, Day1, Day2, Day3
 
     -- Modules included in this library but not exported.
     -- other-modules:
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base ^>=4.17.2.1, array
+    build-depends:    base ^>=4.17.2.1, containers
     hs-source-dirs:   src
     default-language: Haskell2010
 
